@@ -19,10 +19,10 @@ jobs:
         run: GOOS=wasip1 GOARCH=wasm go build -buildmode=c-shared -o plugin.wasm plugin.go
 
       - name: Create packate
-        run: zip listenbrainz-daily-playlist.ndp plugin.wasm manifest.json README.md LICENSE.md
+        run: zip listenbrainz-playlists.ndp plugin.wasm manifest.json README.md LICENSE.md
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: listenbrainz-daily-playlist.ndp
-          path: listenbrainz-daily-playlist.ndp
+          name: listenbrainz-playlists.ndp
+          path: listenbrainz-playlists.ndp
