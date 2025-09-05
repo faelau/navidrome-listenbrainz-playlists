@@ -51,13 +51,13 @@ Enabled = true
 # Optional, if you want to specify a different path. Otherwise it is your data directory / plugins
 Folder = "SOME_CUSTOM_PATH_TO_PLUGINS"
 
-[PluginConfig.listenbrainz-daily-playlist]
+[PluginConfig.listenbrainz-playlists]
 Split = ";"
 Schedule = "@every 24h"
 
 Sources = "https://listenbrainz.org/playlist/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx;https://listenbrainz.org/playlist/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx"
-"Sources[0]" = "ListenBrainz Daily Jams"
-"Sources[1]" = "ListenBrainz Weekly Jams"
+"Sources[0]" = "An example playlist"
+"Sources[1]" = "Another example playlist"
 
 Users = "user1;user2"
 "Users[0]" = "lb-uzername-1"
@@ -74,27 +74,20 @@ The default value if not specified is `;`
 This is a schedule instructing how often to run the sync.
 The sample configuration `@every 24h` does it every 24 hours.
 This is the default option, so it can be omitted.
-Please note that ListenBrainz playlists are only updated once a day.
 
 Also note, when Navidrome is restarted, this plugin will check if any playlists are out of date, and if so, fetch them.
 
 ### Sources
 This specifies the source(s) to fetch from ListenBrainz, and what name to use when importing into Navidrome.
-Source names include:
+Source are specified and identified by it's link:
 
-- `daily-jams`: daily playlist of tracks you've listened to before
-- `weekly-jams`: weekly playlist of tracks you've listened to before
-- `weekly-exploration`: weekly playlist of new tracks. This is likely to have few matches in your library
+- `https://listenbrainz.org/playlist/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx`: valid link
+- `https://listenbrainz.org/playlist/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxx/`: not valid because of trailing slash
 
 `Sources` itself is multi-valued, split by the `Split` token.
-So, in the example above, you have two sources: `daily-jams` and `weekly-jams`.
 
 For each source, you must then specify the name to use when importing.
 The key is `sources[zero-based-index]`, and the value is the playlist name.
-
-In the above example, this means:
-1. Import `daily-jams` playlists with the name `ListenBrainz Daily Jams`
-2. Import `weekly-jams` playlists with the name `ListenBrainz Weekly Jams`
 
 ### Users
 This specifies which Subsonic/Navidrome users to fetch, and provides their ListenBrainz username.
@@ -104,7 +97,7 @@ Their ListenBrainz usernames are `lb-uzername-1` and `lb-uzername-2`, respective
 
 ### Optional settings
 
-#### Disable cehcking on startup
+#### Disable checking on startup
 To disable fetching on service start, pass in the following config to the plugin:
 
 ```toml
